@@ -8,17 +8,7 @@ output: pdf_document
 
 This exercise accompanies the introductory material in Environmental Data Analytics. 
 
-## Directions
-1.  Rename this file `<FirstLast>_A01_Introduction.Rmd` (replacing `<FirstLast>` with your first and last name).
-2.  Change "Student Name" on line 3 (above) with your name.
-3.  Work through the steps, **creating code and output** that fulfill each instruction.
-4.  Be sure to **answer the questions** in this assignment document.
-5.  When you have completed the assignment, **Knit** the text and code into a single PDF file.
-6.  After Knitting, submit the completed exercise (PDF file) to the appropriate assignment section on Canvas.
-
-
 ## 1) Discussion Questions
-Enter answers to the questions just below the >Answer: prompt.
 
 1. What are your previous experiences with data analytics, R, and Git? Include both formal and informal training.
 
@@ -31,7 +21,6 @@ Enter answers to the questions just below the >Answer: prompt.
 3. Are there any components of the course about which you feel apprehensive?
 
 > Answer: I am slightly nervous about navigating the R and Github platforms, and understanding all of the terminology and coding functions. I think once I feel confident navigating both platforms and utilizing all of the functions, I will feel much more confident overall.
-
 
 ## 2) GitHub
 
