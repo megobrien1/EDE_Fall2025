@@ -158,29 +158,45 @@ ggplot(USGS.flow.data) +
 Visualize relationships between continuous numerical variables.
 
 ```{r, fig.height = 3, fig.width = 4}
-ggplot(USGS.flow.data) +
-  geom_point(aes(x = discharge.mean, y = gage.height.mean))
 
 ggplot(USGS.flow.data) +
   geom_point(aes(x = datetime, y = discharge.mean))
+
+# Make sure datetime is proper POSIXct
+USGS.flow.data$datetime <- as.POSIXct(USGS.flow.data$datetime, tz = "UTC")
+
+# Make sure discharge.mean is numeric
+USGS.flow.data$discharge.mean <- as.numeric(USGS.flow.data$discharge.mean)
+
+# Drop rows with NA, NaN, or Inf in either column
+USGS.flow.data <- subset(
+  USGS.flow.data,
+  is.finite(datetime) & is.finite(discharge.mean)
+)
+
+# Try plotting again
+library(ggplot2)
+ggplot(USGS.flow.data) +
+  geom_point(aes(x = datetime, y = discharge.mean))
+
 ```
 
 Question: under what circumstances would it be beneficial to use each of these graph types (bar plot, histogram, frequency polygon, box-and whisker, violin, scatterplot)?
 
-> Answer: 
+> Answer: Different data types are more suitably visualized in some graph types more than others. It depends on the kind of data you are looking at and what you want to show. 
 
 ## Ending discussion
 What did you learn about the USGS discharge dataset today? What separate insights did the different graph types offer?
-> Answer: 
+> Answer: There is a positive correlation between gage and discharge, and there is a higher count of lower gage height and discharge levels. Different graph types display this data differently. 
 
 
 How can multiple options for data exploration inform our understanding of our data?
 
-> Answer: 
+> Answer: Different forms of data exploration can highlight different aspects of the data. This is important to gain a more full understanding of the dataset. 
 
 
 Do you see any patterns in the USGS data for the Eno River? What might be responsible for those patterns and/or relationships?
 
-> Answer: 
+> Answer: The average gage height and average discharge had a positive correlation. This makes sense because as the level of water in the river rose, so did the discharge rate. 
 
 

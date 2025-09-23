@@ -59,9 +59,9 @@ You need to load packages each time you start (or restart) an R coding session; 
 
 ```{r Setup: Loading Packages}
 #Install packages - uncomment these only when you need to install packages
-#install.packages('dplyr')
-#install.packages('ggplot')
-#install.packages('here')
+install.packages('dplyr')
+install.packages('ggplot')
+install.packages('here')
 
 #Load the tidyverse, ggplot2, and here package
 library(dplyr)
