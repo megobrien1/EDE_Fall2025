@@ -26,7 +26,10 @@ Why is data exploration our first step in analyzing a dataset? What information 
 ## -Set up-
 # 1. Load packages (tidyverse, here)
 
+#install.packages('lubridate')
+
 library(tidyverse)
+library(ggplot2)
 library(here)
 library(lubridate)
 
@@ -57,7 +60,7 @@ str(USGS.flow.data)
 class(USGS.flow.data$datetime)
 
 # Change it to a date object and confirm
-USGS.flow.data$datetime <- as.Date(USGS.flow.data$datetime, format= '%y-%m-%d')
+USGS.flow.data$datetime <- as.Date(USGS.flow.data$datetime, format = '%y-%m-%d')
 class(USGS.flow.data$datetime)
 
 ```
@@ -159,23 +162,6 @@ Visualize relationships between continuous numerical variables.
 
 ```{r, fig.height = 3, fig.width = 4}
 
-ggplot(USGS.flow.data) +
-  geom_point(aes(x = datetime, y = discharge.mean))
-
-# Make sure datetime is proper POSIXct
-USGS.flow.data$datetime <- as.POSIXct(USGS.flow.data$datetime, tz = "UTC")
-
-# Make sure discharge.mean is numeric
-USGS.flow.data$discharge.mean <- as.numeric(USGS.flow.data$discharge.mean)
-
-# Drop rows with NA, NaN, or Inf in either column
-USGS.flow.data <- subset(
-  USGS.flow.data,
-  is.finite(datetime) & is.finite(discharge.mean)
-)
-
-# Try plotting again
-library(ggplot2)
 ggplot(USGS.flow.data) +
   geom_point(aes(x = datetime, y = discharge.mean))
 
