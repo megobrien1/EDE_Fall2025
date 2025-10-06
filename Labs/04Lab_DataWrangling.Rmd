@@ -120,7 +120,7 @@ NTL.phys.data.processed <-
 #Exercise 3: Using a pipe filter NTL.phys.data for Tuesday Lake from 1990 
 # through 1999 only for July.
 
-  NTL.phys.data.tues.90.99.July <- NTL.phys.data %>%
+NTL.phys.data.tues.90.99.July <- NTL.phys.data %>%
   filter(lakename == 'Tuesday Lake',
          year4 >= 1990,
          year4 <= 1999, 
@@ -131,7 +131,7 @@ NTL.phys.data.processed <-
 # find the mean surface water temperature. 
 # (hint: you will need to filter for depth==0). 
 
-  NTL.phys.data.tues.90.99.July.surface <- NTL.phys.data.tues.90.99.July %>%
+NTL.phys.data.tues.90.99.July.surface <- NTL.phys.data.tues.90.99.July %>%
     filter(depth == 0)%>%
     summarise(mean_surface_temp=mean(temperature_C))
   
@@ -151,17 +151,22 @@ For gather we will use `pivot_longer` and for spread we will use `pivot_wider`.
 #  the new column holding the irradiance type as "Irradiance_Type", and name the
 #  new column holding the irradiance values as "Irradiance_Value".
 
-df_long <- df %>%
+irradiance_data <- NTL.phys.data %>%
   pivot_longer(
-    cols = c(irradianceWater, irradianceDeck),  # replace with your actual column names
-    names_to = "Irradiance_Type",
-    values_to = "Irradiance_Value"
+    cols = c(irradianceWater, irradianceDeck),  
+    names_to = "Irradiance_Type",              
+    values_to = "Irradiance_Value"             
   )
 
 
 #Exercise 6: Spread temperatureC into more than one column based on the depth.
 
-
+temperatureC <- NTL.phys.data %>%
+  pivot_longer(
+    cols = c(temperature_C, depth), 
+    names_to = "Temperature_C",
+    values_to = "Depth"
+  )
 
 ```
 

@@ -39,14 +39,21 @@ pm25$Date <- mdy(pm25$Date)
 ```{r Explore the data}
 # Compute the number of different sites
 
+n_distinct(pm25$Site.Name)
+#There are 25
 
 # Compute the mean and median PM 2.5 concentration
 
+mean(pm25$Daily.Mean.PM2.5.Concentration)
+# 7.68
 
 # What are the units
 
+#ug/m3 LC
 
 # What is the date range (min and max dates)
+
+range(pm25$Date, na.rm = TRUE)
 
 ```
 
@@ -61,12 +68,37 @@ pm25$Date <- mdy(pm25$Date)
 ```{r Visualize the data}
 #Number of samples using each different source 
 
+source_counts <- pm25 %>%
+  count(Source)
+
+ggplot(source_counts, aes(x =Source, y = n)) +
+  geom_col() +
+  labs(
+    title = "Number of Samples by Source",
+    x = "Source",
+    y = "Number of Samples"
+  ) 
 
 #Distribution of daily mean concentration values
 
 
+ggplot(pm25, aes(x = Daily.Mean.PM2.5.Concentration)) +
+  geom_histogram() +
+  labs(
+    title = "Distribution of Daily Mean PM2.5 Concentrations",
+    x = "Daily Mean PM2.5 (µg/m³)",
+    y = "Count"
+  ) 
+
 #Distribution of daily mean concentration, by source
 
+ggplot(pm25, aes(x = Source, y = Daily.Mean.PM2.5.Concentration)) +
+  geom_boxplot() +
+  labs(
+    title = "Distribution of Daily Mean PM2.5 Concentrations by Source",
+    x = "Source",
+    y = "Daily Mean PM2.5 (µg/m³)"
+  ) 
 
 
 ```

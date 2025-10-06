@@ -23,9 +23,9 @@ Opening discussion: why might we be interested in long-term observations of temp
 
 ```{r setup workspace, message = FALSE}
 getwd()
-install.packages('tidyverse')
+#install.packages('tidyverse')
 library(tidyverse)
-install.packages('lubridate')
+#install.packages('lubridate')
 library(lubridate)
 NTL.phys.data <- read.csv("./Data/Raw/NTL-LTER_Lake_ChemistryPhysics_Raw.csv", stringsAsFactors = TRUE)
 
@@ -109,17 +109,26 @@ NTL.phys.data.JunethruOctober4 <- filter(NTL.phys.data, daynum %in% c(152:304))
 
 # Exercise: 
 # filter NTL.phys.data for the year 1999
+
+NTL.phys.data.1999 <- NTL.phys.data[NTL.phys.data$year4 == 1999, ]
+
 # what code do you need to use, based on the class of the variable?
+
 class(NTL.phys.data$year4)
 
 # Exercise: 
+
 # filter NTL.phys.data for Tuesday Lake from 1990 through 1999.
 
+NTL.phys.data.tues.90.99 <- NTL.phys.data[NTL.phys.data$lakename == "Tuesday Lake" & 
+NTL.phys.data$year4 >= 1990 & 
+NTL.phys.data$year4 <= 1999, 
+]
 
 ```
-Question: Why don't we filter using row numbers?
+Question: Why don't we filter using row numbers? 
 
-> Answer: 
+> Answer: The categories are sorted by columns. In order to filter these categories, you need to filter the columns. 
 
 ### Arrange
 
@@ -133,6 +142,7 @@ NTL.phys.data.depth.descending <- arrange(NTL.phys.data, desc(depth))
 # Arrange NTL.phys.data by temperature, in descending order. 
 # Which dates, lakes, and depths have the highest temperatures?
 
+NTL.phys.data.temp.descending <- arrange(NTL.phys.data, desc(temperature_C))
 
 ```
 ### Select
@@ -194,6 +204,4 @@ write.csv(NTL.phys.data.PeterPaul1, row.names = FALSE, file = "./Data/Processed/
 
 ## Closing Discussion
 
-When we wrangle a raw dataset into a processed dataset, we create a code file that contains only the wrangling code. We then save the processed dataset as a new spreadsheet and then create a separate code file to analyze and visualize the dataset. Why do we keep the wrangling code separate from the analysis code?
-
-
+When we wrangle a raw dataset into a processed dataset, we create a code file that contains only the wrangling code. We then save the processed dataset as a new spreadsheet and then create a separate code file to analyze and visualize the dataset. Why do we keep the wrangling code separate from the analysis code? # It is important to keep the original data seperate from the processed data in case you want to go back to the original data. 

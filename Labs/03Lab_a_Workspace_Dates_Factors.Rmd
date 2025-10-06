@@ -38,8 +38,11 @@ And thus we introduce the `here` package, designed to streamline this process. A
  
 ```{r The here package}
 #install.packages('here')
-install.packages('here')
-library(here) #Note this package may conflict with plyr and lubridate
+#install.packages('here')
+library('here') #Note this package may conflict with plyr and lubridate
+library('lubridate')
+library('dplyr')
+
 
 #The command `here()` points to the location containing the ".Rrpoj" file, i.e. 
 # the project directory...
@@ -51,6 +54,8 @@ getwd()
 here()
 
 #Return R's working directory to the project directory
+
+
 setwd(here())
 
 #Arguments in the `here()` command allow easy navigation within subfolders
@@ -120,7 +125,7 @@ Install and load the package lubridate into your R session. Lubridate offers fas
 More info on lubridate [here][<https://cran.r-project.org/web/packages/lubridate/lubridate.pdf>].
 
 ```{r DateExercise1}
-install.packages("lubridate")
+#install.packages("lubridate")
 library(lubridate)
 
 #Ex1
@@ -342,9 +347,23 @@ usgs_flow_data$month <- month(usgs_flow_data$datetime)
 
 #Convert to a factor, with labels and levels
 
+usgs_flow_data$month <- factor(
+  usgs_flow_data$month,
+  levels = 1:12,                        
+  labels = month.abb                    
+)
 
 #Plot
 
+library(ggplot2)
+
+ggplot(usgs_flow_data, aes(x = month, y = flow)) +
+  geom_boxplot() +
+  labs(
+    title = "Monthly Flow Distribution",
+    x = "Month",
+    y = "Flow"
+  ) 
 
 ```
 
