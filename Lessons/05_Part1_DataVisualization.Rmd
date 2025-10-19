@@ -6,7 +6,10 @@ output: pdf_document
 geometry: margin=2.54cm
 editor_options: 
   chunk_output_type: console
+toc: true 
 ---
+
+\listoffigures
 
 ## Objectives
 1. Perform simple data visualizations in the R package `ggplot`
